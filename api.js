@@ -8,17 +8,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // post - enviar dados
-app.post('/add-usuario', async (req, res) => {
-  const { nome, email, senha } = req.body;
+app.post('/add-jogo', async (req, res) => {
+  const { nome, lancamento, genero } = req.body;
 
   try {
     const [result] = await db.query(
-      'INSERT INTO usuarios (usuario_nome, usuario_email, usuario_senha) VALUES (?, ?, ?)',
-      [nome, email, senha]
+      'INSERT INTO jogos (nome, lancamento, genero) VALUES (?, ?, ?)',
+      [nome, lancamento, genero],
     );
-    res.send('Usuário inserido com sucesso!');
+    res.send('Jogo inserido com sucesso!');
   } catch (error) {
-    res.status(500).send('Erro ao inserir o usuário: ' + error.message);
+    res.status(500).send('Erro ao inserir o Jogo: ' + error.message);
   }
 });
 
